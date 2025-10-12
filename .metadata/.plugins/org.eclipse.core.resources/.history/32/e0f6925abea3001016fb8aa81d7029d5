@@ -1,0 +1,5 @@
+package com.mediserve.appointmentservice.repository;
+
+public interface AppointmentRepository {
+
+}

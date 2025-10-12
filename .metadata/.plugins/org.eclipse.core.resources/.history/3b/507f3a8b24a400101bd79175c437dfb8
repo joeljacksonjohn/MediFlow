@@ -1,0 +1,77 @@
+package com.mediserve.pharmacyservice.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.mediserve.pharmacyservice.dto.MedicineDTO;
+import com.mediserve.pharmacyservice.dto.UserDTO;
+import com.mediserve.pharmacyservice.entity.Medicines;
+import com.mediserve.pharmacyservice.entity.Prescriptions;
+import com.mediserve.pharmacyservice.repository.MedicineRepository;
+import com.mediserve.pharmacyservice.repository.PrescriptionRepository;
+
+@Service
+public class PharmacyService {
+
+	private final MedicineRepository medicineRepository;
+	private final PrescriptionRepository prescriptionRepository;
+	private final RestTemplate restTemplate;
+
+	public PharmacyService(MedicineRepository medicineRepository, PrescriptionRepository prescriptionRepository,
+			RestTemplate restTemplate) {
+		this.medicineRepository = medicineRepository;
+		this.prescriptionRepository = prescriptionRepository;
+		this.restTemplate = restTemplate;
+	}
+
+	public Medicines addMedicine(Medicines medicines) {
+		return medicineRepository.save(medicines);
+	}
+
+	public List<Medicines> getAllMedicines() {
+		return medicineRepository.findAll();
+	}
+
+	public Prescriptions addPrescription(Prescriptions prescriptions) {
+
+		medicineRepository.findById(prescriptions.getMedicineId())
+				.orElseThrow(() -> new RuntimeException("Medicine not found"));
+
+		try {
+
+			UserDTO patient = restTemplate.getForObject("http://localhost:8081/users/" + prescriptions.getPatientId(),
+					UserDTO.class);
+
+			UserDTO doctor = restTemplate.getForObject("http://localhost:8081/users/" + prescriptions.getDoctorId(),
+					UserDTO.class);
+
+			MedicineDTO medicine = restTemplate.getForObject("http://localhost:8082/medicines/" + prescriptions.getMedicineId(), 
+					MedicineDTO.class);
+
+			
+			prescriptions.setPatientName(patient.getName());
+			prescriptions.setDoctorName(doctor.getName());
+			prescriptions.setMedicineName(medicine.getName());
+
+		} catch (Exception e) {
+			throw new RuntimeException("Patient or Doctor not found in UserService");
+		}
+
+		return prescriptionRepository.save(prescriptions);
+	}
+
+	public List<Prescriptions> getAllPrescriptions() {
+		return prescriptionRepository.findAll();
+	}
+
+	public List<Prescriptions> getPrescriptionsByPatient(Integer patientId) {
+		return prescriptionRepository.findByPatientId(patientId);
+	}
+
+	public List<Prescriptions> getPrescriptionsByDoctor(Integer doctorId) {
+		return prescriptionRepository.findByDoctorId(doctorId);
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.mediserve.billingservice.service;
+
+public class BillingService {
+
+}

@@ -1,0 +1,62 @@
+package com.mediserve.billingservice.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mediserve.billingservice.entity.Bill;
+import com.mediserve.billingservice.service.BillingService;
+
+@RestController
+@RequestMapping("/bills")
+public class BillingController {
+	private final BillingService billingService;
+
+	public BillingController(BillingService billingService) {
+		this.billingService = billingService;
+	}
+
+	// Create bill
+	@PostMapping
+	public Bill createBill(@RequestBody Bill bill) {
+		return billingService.createBill(bill);
+	}
+
+	// Get all bills
+	@GetMapping
+	public List<Bill> getAllBills() {
+		return billingService.getAllBills();
+	}
+
+	// Get bills by patient
+	@GetMapping("/patient/{patientId}")
+	public List<Bill> getBillsByPatient(@PathVariable Integer patientId) {
+		return billingService.getBillsByPatient(patientId);
+	}
+
+	// Update bill status
+	@PutMapping("/{id}/status")
+	public Bill updateBillStatus(@PathVariable Integer id, @RequestParam String status) {
+		return billingService.updateBillStatus(id, status);
+	}
+
+	// Get bill by ID
+	@GetMapping("/{id}")
+	public Bill getBillById(@PathVariable Integer id) {
+		return billingService.getBillById(id);
+	}
+
+	// Delete bill
+	@DeleteMapping("/{id}")
+	public void deleteBill(@PathVariable Integer id) {
+		billingService.deleteBill(id);
+	}
+}

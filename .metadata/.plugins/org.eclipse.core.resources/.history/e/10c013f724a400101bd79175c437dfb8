@@ -1,0 +1,5 @@
+package com.mediserve.pharmacyservice.controller;
+
+public class PharmacyController {
+
+}

@@ -1,0 +1,5 @@
+package com.mediserve.appointmentservice.dto;
+
+public class UserDTO {
+
+}

@@ -1,0 +1,5 @@
+package com.mediserve.billingservice.entity;
+
+public class Bill {
+
+}

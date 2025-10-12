@@ -1,0 +1,125 @@
+package com.mediserve.pharmacyservice.entity;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "prescriptions")
+public class Prescriptions {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	@Column(name = "patient_id")
+	private Integer patientId;
+
+	@Column(name = "doctor_id")
+	private Integer doctorId;
+
+	@Column(name = "medicine_id")
+	private Integer medicineId;
+
+	@Column(name = "patient_name")
+	private String patientName;
+
+	@Column(name = "doctor_name")
+	private String doctorName;
+
+	@Column(name = "medicine_name")
+	private String medicineName;
+
+	private String dosage;
+
+	private Integer quantity;
+
+	@Column(name = "prescription_date")
+	private LocalDateTime prescriptionDate = LocalDateTime.now();
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(Integer patientId) {
+		this.patientId = patientId;
+	}
+
+	public Integer getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(Integer doctroId) {
+		this.doctorId = doctroId;
+	}
+
+	public Integer getMedicineId() {
+		return medicineId;
+	}
+
+	public void setMedicineId(Integer medicineId) {
+		this.medicineId = medicineId;
+	}
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
+	}
+
+	public String getDoctorName() {
+		return doctorName;
+	}
+
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
+	}
+
+	public String getMedicineName() {
+		return medicineName;
+	}
+
+	public void setMedicineName(String medicineName) {
+		this.medicineName = medicineName;
+	}
+
+	public String getDosage() {
+		return dosage;
+	}
+
+	public void setDosage(String dosage) {
+		this.dosage = dosage;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public LocalDateTime getPrescriptionDate() {
+		return prescriptionDate;
+	}
+
+	public void setPrescriptionDate(LocalDateTime prescriptionDate) {
+		this.prescriptionDate = prescriptionDate;
+	}
+
+}

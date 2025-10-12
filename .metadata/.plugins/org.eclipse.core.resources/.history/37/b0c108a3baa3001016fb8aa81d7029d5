@@ -1,0 +1,5 @@
+package com.mediserve.userservice.service;
+
+public class UserService {
+
+}

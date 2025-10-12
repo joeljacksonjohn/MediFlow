@@ -1,0 +1,5 @@
+package com.mediserve.appointmentservice.controller;
+
+public class AppointmentController {
+
+}

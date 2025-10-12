@@ -1,0 +1,5 @@
+package com.mediserve.billingservice.dto;
+
+public class MedicineDTO {
+
+}

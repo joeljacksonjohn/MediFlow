@@ -1,0 +1,5 @@
+package com.mediserve.pharmacyservice.repository;
+
+public interface PrescriptionRepository {
+
+}

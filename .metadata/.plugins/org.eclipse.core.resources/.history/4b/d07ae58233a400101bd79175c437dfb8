@@ -1,0 +1,5 @@
+package com.mediserve.billingservice.config;
+
+public class BillConfig {
+
+}

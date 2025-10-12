@@ -1,0 +1,5 @@
+package com.mediserve.billingservice.repository;
+
+public interface BillRepository {
+
+}

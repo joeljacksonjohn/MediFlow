@@ -1,0 +1,5 @@
+package com.mediserve.userservice.entity;
+
+public class User {
+
+}

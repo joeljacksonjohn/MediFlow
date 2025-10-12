@@ -1,0 +1,5 @@
+package com.mediserve.pharmacyservice.service;
+
+public class PharmacyService {
+
+}
